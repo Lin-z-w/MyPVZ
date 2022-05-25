@@ -30,6 +30,20 @@ BigMouth::BigMouth(int H, int d, int atra, QString n, int icost)
 
 }
 
+bool PeaShooter::canAttack(Creature *crt) {
+    if ((abs(crt->getCx() - getCx()) <= 1) && crt->getCy() - getCy() <= getAttackRange()) {
+        return true;
+    }
+    return  false;
+}
+
+bool BigMouth::canAttack(Creature *crt) {
+    if ((abs(crt->getCx() - getCx()) <= 1) && (abs(crt->getCy() - getCy()) <= 1) && !crt->getIs_fly()) {
+        return true;
+    }
+    return false;
+}
+
 
 
 

@@ -7,6 +7,7 @@
 #include "zombie.h"
 #include <QTimer>
 #include <QMainWindow>
+#include <QPainter>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -21,11 +22,11 @@ public:
     ~MainWindow();
     void test();
 
+protected:
+    void paintEvent(QPaintEvent *);
+
 public slots:
     void dealGameTimer();
-
-private slots:
-    void on_pushButton_clicked();
 
 private:
     Ui::MainWindow *ui;

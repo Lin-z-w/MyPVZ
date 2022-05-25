@@ -7,7 +7,8 @@ class Zombie : public Creature
 {
 public:
     Zombie(int H, int d, int atra, bool isr, bool isp, bool isz, bool ifl, QString n, int icost = 0);
-
+    bool canAttack(Creature* crt) override;
+    void zombieMove() override;
 };
 
 class GroundZ : public Zombie

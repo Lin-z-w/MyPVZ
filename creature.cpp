@@ -12,6 +12,12 @@ Creature::Creature(int H, int d, int atra, bool isr, bool isp, bool isz, bool if
     is_fly = ifl;
     warlike = true;
     cost = icost;
+    cx = -1;
+    cy = -1;
+}
+
+Creature::~Creature() {
+
 }
 
 int Creature::getAttackRange() const
@@ -69,12 +75,32 @@ void Creature::setWarlike(bool value)
     warlike = value;
 }
 
-QVector<QString> Creature::getWay() const
+int Creature::getCx() const
+{
+    return cx;
+}
+
+void Creature::setCx(int value)
+{
+    cx = value;
+}
+
+int Creature::getCy() const
+{
+    return cy;
+}
+
+void Creature::setCy(int value)
+{
+    cy = value;
+}
+
+QString Creature::getWay() const
 {
     return way;
 }
 
-void Creature::setWay(const QVector<QString> &value)
+void Creature::setWay(const QString &value)
 {
     way = value;
 }
@@ -84,6 +110,15 @@ void Creature::hPDecrease(int d)
     HP -= d;
     qDebug() << QString("%1's HP has decrease %2!").arg(name).arg(d);
 }
+
+bool Creature::canAttack(Creature *crt) {
+    return true;
+}
+
+void Creature::zombieMove() {
+
+}
+
 
 
 

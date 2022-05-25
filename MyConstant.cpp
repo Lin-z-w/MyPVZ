@@ -6,7 +6,7 @@ const int PeaShooterHP = 10, NormalZombieHP = 10, RemoteZombieHP = 10, BallonHP 
 
 
 //Attack Range
-const int PeaShooterAtRa = 1, NormalZombieAtRa = 1, RemoteZombieAtRa = 3, BallonAtRa = 1, BigMouthAtRa = 1;
+const int PeaShooterAtRa = 3, NormalZombieAtRa = 1, RemoteZombieAtRa = 1, BallonAtRa = 1, BigMouthAtRa = 1;
 
 
 //Damage

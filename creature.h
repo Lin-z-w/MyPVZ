@@ -11,10 +11,12 @@ class Creature
 {
 public:
     Creature(int H, int d, int atra, bool cinr, bool isp, bool isz, bool ifl, QString n, int icost);
+    virtual ~Creature();
 
     //基本行为
     void hPDecrease(int d);
-
+    virtual bool canAttack(Creature* crt);
+    virtual void zombieMove();
 
     //set/get接口
     int getAttackRange() const;
@@ -29,14 +31,20 @@ public:
     bool getWarlike() const;
     void setWarlike(bool value);
 
-    QVector<QString> getWay() const;
-    void setWay(const QVector<QString> &value);
+    int getCx() const;
+    void setCx(int value);
 
-private:
-    int HP, damage, attack_range, cost;
+    int getCy() const;
+    void setCy(int value);
+
+    QString getWay() const;
+    void setWay(const QString &value);
+
+protected:
+    int HP, damage, attack_range, cost, cx, cy;
     QString name;
     bool canInRemote, is_plant, is_zombie, is_fly, warlike;
-    QVector<QString> way;
+    QString way;
 
 
 
