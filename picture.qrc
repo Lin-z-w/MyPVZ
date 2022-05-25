@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/">
+        <file>picture/AllMap.png</file>
+        <file>picture/MeleePlace.png</file>
+        <file>picture/MeleeZombie.gif</file>
+        <file>picture/Obstacle.png</file>
+        <file>picture/OurHome.png</file>
+        <file>picture/RemotePlace.png</file>
+        <file>picture/RemoteZombie.gif</file>
+        <file>picture/Wallnut.png</file>
+        <file>picture/Wallnut2.png</file>
+    </qresource>
+</RCC>
