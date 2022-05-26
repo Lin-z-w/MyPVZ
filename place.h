@@ -9,7 +9,7 @@
 class Place
 {
 public:
-    Place(int a, int x, int y);//1表示近战路径，2表示远程路径，3表示障碍，4表示我方基地，5表示敌方基地
+    Place(int a, double x, double y);//1表示近战路径，2表示远程路径，3表示障碍，4表示我方基地，5表示敌方基地
     void add_creature(Creature* crt);
 
     //配合GameState的函数
@@ -18,12 +18,6 @@ public:
     bool haveplant();
 
     //get/set函数
-    int getPx() const;
-    void setPx(int value);
-
-    int getPy() const;
-    void setPy(int value);
-
     bool getIs_remote() const;
 
     bool getIs_planthome() const;
@@ -34,12 +28,19 @@ public:
     QString getPway() const;
     void setPway(const QString &value);
 
+    double getPx() const;
+    void setPx(double value);
+
+    double getPy() const;
+    void setPy(double value);
+
+    bool getIs_melle() const;
 
 private:
     QString name, pway;
     bool is_melle, is_remote, is_planthome, is_zombiehome, is_obstacle;
     Creature* plantHere;
-    int px, py;
+    double px, py;
 
 };
 

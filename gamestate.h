@@ -6,13 +6,14 @@
 #include <QDebug>
 #include <QVector>
 
-typedef QMap<QString, Place> placeMap;
+typedef QMap<QString, Place*> placeMap;
 typedef QVector<Creature*> Crtvector;
+extern int mymap[];
 
 class GameState
 {
 private:
-    placeMap allplace, melleplace, remoteplace, planthome, zombiehome, obstacle;
+    placeMap allplace;
     Crtvector allplant, allzombie;
     int resource, roll;
     bool gameover;
@@ -25,6 +26,7 @@ public:
     void removeDead();
     void reportGameState();
     void actionInARoll();
+    Place* findplace(QString posi);
 
     //Zombies' Aciton
     void actionForPlant();
@@ -38,8 +40,13 @@ public:
     void attackPlant(Creature* crt);
 
     //PC or User Action
+    void computerAction();
     void addCreature(Creature* crt, QString posi);
-
+    Crtvector getAllplant() const;
+    Crtvector getAllzombie() const;
+    bool getGameover() const;
+    placeMap getAllplace() const;
+    int getRoll() const;
 };
 
 #endif // GAMEMAP_H

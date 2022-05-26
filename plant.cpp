@@ -30,6 +30,12 @@ BigMouth::BigMouth(int H, int d, int atra, QString n, int icost)
 
 }
 
+WallNut::WallNut(int H, int d, int atra, QString n, int icost)
+    : MellePlant(H, d, atra, n, icost)
+{
+
+}
+
 bool PeaShooter::canAttack(Creature *crt) {
     if ((abs(crt->getCx() - getCx()) <= 1) && crt->getCy() - getCy() <= getAttackRange()) {
         return true;
@@ -44,6 +50,8 @@ bool BigMouth::canAttack(Creature *crt) {
     return false;
 }
 
-
+bool WallNut::canAttack(Creature *) {
+    return false;
+}
 
 

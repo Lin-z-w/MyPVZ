@@ -23,6 +23,7 @@ SOURCES += \
     mainwindow.cpp \
     place.cpp \
     plant.cpp \
+    startwidget.cpp \
     zombie.cpp
 
 HEADERS += \
@@ -32,6 +33,7 @@ HEADERS += \
     mainwindow.h \
     place.h \
     plant.h \
+    startwidget.h \
     zombie.h
 
 FORMS += \

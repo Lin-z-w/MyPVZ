@@ -75,26 +75,6 @@ void Creature::setWarlike(bool value)
     warlike = value;
 }
 
-int Creature::getCx() const
-{
-    return cx;
-}
-
-void Creature::setCx(int value)
-{
-    cx = value;
-}
-
-int Creature::getCy() const
-{
-    return cy;
-}
-
-void Creature::setCy(int value)
-{
-    cy = value;
-}
-
 QString Creature::getWay() const
 {
     return way;
@@ -105,13 +85,43 @@ void Creature::setWay(const QString &value)
     way = value;
 }
 
+double Creature::getFoot() const
+{
+    return foot;
+}
+
+void Creature::setFoot(double value)
+{
+    foot = value;
+}
+
+double Creature::getCx() const
+{
+    return cx;
+}
+
+void Creature::setCx(double value)
+{
+    cx = value;
+}
+
+double Creature::getCy() const
+{
+    return cy;
+}
+
+void Creature::setCy(double value)
+{
+    cy = value;
+}
+
 void Creature::hPDecrease(int d)
 {
     HP -= d;
     qDebug() << QString("%1's HP has decrease %2!").arg(name).arg(d);
 }
 
-bool Creature::canAttack(Creature *crt) {
+bool Creature::canAttack(Creature *) {
     return true;
 }
 

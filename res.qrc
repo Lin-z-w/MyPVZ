@@ -2,12 +2,26 @@
     <qresource prefix="/picture">
         <file>res/AllMap.png</file>
         <file>res/MeleePlace.png</file>
-        <file>res/MeleeZombie.gif</file>
         <file>res/Obstacle.png</file>
         <file>res/OurHome.png</file>
         <file>res/RemotePlace.png</file>
         <file>res/RemoteZombie.gif</file>
-        <file>res/Wallnut.png</file>
         <file>res/Wallnut2.png</file>
+        <file>res/RPlace.png</file>
+        <file>res/ZombieHome.png</file>
+        <file>res/RemoteZombie.png</file>
+        <file>res/BigMouth.png</file>
+        <file>res/MeleePlant.png</file>
+        <file>res/PeaShooter.png</file>
+        <file>res/MeleeZombie0.png</file>
+        <file>res/MeleeZombie1.png</file>
+        <file>res/MeleeZombie2.png</file>
+        <file>res/MeleeZombie3.png</file>
+        <file>res/RZ0.png</file>
+        <file>res/RZ1.png</file>
+        <file>res/RZ2.png</file>
+        <file>res/RZ3.png</file>
+        <file>res/Wallnut1.png</file>
+        <file>res/Wallnut0.png</file>
     </qresource>
 </RCC>

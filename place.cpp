@@ -1,7 +1,7 @@
 #include "place.h"
 #include <QDebug>
 
-Place::Place(int a, int x, int y)//1表示近战路径，2表示远程路径，3表示障碍，4表示我方基地
+Place::Place(int a, double x, double y)//1表示近战路径，2表示远程路径，3表示障碍，4表示我方基地
 {
     px = x;
     py = y;
@@ -45,26 +45,6 @@ void Place::add_creature(Creature* crt)
     }
 }
 
-int Place::getPx() const
-{
-    return px;
-}
-
-void Place::setPx(int value)
-{
-    px = value;
-}
-
-int Place::getPy() const
-{
-    return py;
-}
-
-void Place::setPy(int value)
-{
-    py = value;
-}
-
 bool Place::getIs_remote() const
 {
     return is_remote;
@@ -88,6 +68,31 @@ QString Place::getPway() const
 void Place::setPway(const QString &value)
 {
     pway = value;
+}
+
+double Place::getPx() const
+{
+    return px;
+}
+
+void Place::setPx(double value)
+{
+    px = value;
+}
+
+double Place::getPy() const
+{
+    return py;
+}
+
+void Place::setPy(double value)
+{
+    py = value;
+}
+
+bool Place::getIs_melle() const
+{
+    return is_melle;
 }
 
 void Place::setPlantHere(Creature *value)

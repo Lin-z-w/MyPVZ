@@ -1,9 +1,9 @@
 #ifndef MYCONSTANT_H
 #define MYCONSTANT_H
 extern const int INITRESOURSE;
-
+extern const int P_LEN;
 //HP
-extern const int PeaShooterHP, NormalZombieHP, RemoteZombieHP, BallonHP, BigMouthHP;
+extern const int PeaShooterHP, NormalZombieHP, RemoteZombieHP, BallonHP, BigMouthHP, WallNutHP;
 
 //Attack Range
 extern const int PeaShooterAtRa, NormalZombieAtRa, RemoteZombieAtRa, BallonAtRa, BigMouthAtRa;

@@ -5,9 +5,16 @@
 #include "place.h"
 #include "plant.h"
 #include "zombie.h"
+#include "startwidget.h"
 #include <QTimer>
 #include <QMainWindow>
 #include <QPainter>
+#include <QIcon>
+#include <QMovie>
+#include <QMouseEvent>
+#include <QPushButton>
+#include <QDialog>
+#include <QMessageBox>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -24,15 +31,28 @@ public:
 
 protected:
     void paintEvent(QPaintEvent *);
+    void mousePressEvent(QMouseEvent *);
 
 public slots:
     void dealGameTimer();
+    void startGame();
+    void addPeaShooter();
+    void addBigMouth();
+    void addWallNut();
 
 private:
     Ui::MainWindow *ui;
 
     QTimer gameTimer;
     GameState Mymap;
+
+    QDialog* lossGame;
+    QPushButton* peaButton, * bigmButton, *wallButton;
+
+
+    StartWidget sw;
+
+//    QMovie* NormalZgif;
 
 };
 #endif // MAINWINDOW_H

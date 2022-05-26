@@ -1,6 +1,8 @@
 #ifndef CREATURE_H
 #define CREATURE_H
 #include "MyConstant.h"
+#include <algorithm>
+#include <QtMath>
 #include <QDebug>
 #include <QVector>
 #include <QString>
@@ -31,17 +33,21 @@ public:
     bool getWarlike() const;
     void setWarlike(bool value);
 
-    int getCx() const;
-    void setCx(int value);
-
-    int getCy() const;
-    void setCy(int value);
-
     QString getWay() const;
     void setWay(const QString &value);
 
+    double getFoot() const;
+    void setFoot(double value);
+
+    double getCx() const;
+    void setCx(double value);
+
+    double getCy() const;
+    void setCy(double value);
+
 protected:
-    int HP, damage, attack_range, cost, cx, cy;
+    double foot, cx, cy;
+    int HP, damage, attack_range, cost;
     QString name;
     bool canInRemote, is_plant, is_zombie, is_fly, warlike;
     QString way;

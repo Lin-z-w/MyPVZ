@@ -43,4 +43,12 @@ public:
     bool canAttack(Creature * crt) override;
 };
 
+//坚果墙
+class WallNut : public MellePlant
+{
+public:
+    WallNut(int H = WallNutHP, int d = 0, int atra = 0, QString = "WallNut", int icost = 0);
+    bool canAttack(Creature *) override;
+};
+
 #endif // PLANT_H

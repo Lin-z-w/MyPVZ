@@ -5,23 +5,48 @@
 int mymap[] = { 1,1,1,1,2,2,5,5,0,
                 1,2,2,1,2,2,2,1,0,
                 1,2,2,1,1,1,1,1,0,
-                4,2,2,2,2,2,2,3,0,
-                4,2,2,2,2,2,2,2,100};   //6行8列，0表示换行，1表示近战路径，2表示远程路径，3表示障碍，
+                4,3,3,3,3,3,2,3,0,
+                4,2,2,2,2,2,2,2,100};   //0表示换行，1表示近战路径，2表示远程路径，3表示障碍，
                                         //4表示我方基地，5表示敌方基地，100表示地图结束
 QString way1 = "(1,8)SSWWWWNNWWWSSS";
 QString way2 = "(1,7)SSSSWWWWWW";
 
 //判断一个生物是否能放到该格子上
-bool canadd(Creature* crt, const Place& pl)
+bool canadd(Creature* crt, Place* pl)
 {
     bool result = false;
     if (crt->getCanInRemote()) {
         result = true;
     }
-    if ((!crt->getCanInRemote()) && (!pl.getIs_remote())) {
+    if ((!crt->getCanInRemote()) && (!pl->getIs_remote())) {
         result = true;
     }
     return result;
+}
+
+Crtvector GameState::getAllplant() const
+{
+    return allplant;
+}
+
+Crtvector GameState::getAllzombie() const
+{
+    return allzombie;
+}
+
+bool GameState::getGameover() const
+{
+    return gameover;
+}
+
+placeMap GameState::getAllplace() const
+{
+    return allplace;
+}
+
+int GameState::getRoll() const
+{
+    return roll;
 }
 
 GameState::GameState()
@@ -33,44 +58,24 @@ GameState::GameState()
     for (int i = 1; ;i++) {
         for (int j = 1; ; j++){
             if (mymap[cnt] == 0 || mymap[cnt] == 100) break;
-            Place newPlace(mymap[cnt], i ,j);
+            Place* newPlace = new Place(mymap[cnt], (double)i ,(double)j);
             QString placePosition = QString("(%1,%2)").arg(i).arg(j);
             allplace.insert(placePosition,newPlace);
-            switch (mymap[cnt]) {
-            case 1:
-                melleplace.insert(placePosition,newPlace);
-                break;
-            case 2:
-                remoteplace.insert(placePosition,newPlace);
-                break;
-            case 3:
-                obstacle.insert(placePosition,newPlace);
-                break;
-            case 4:
-                planthome.insert(placePosition,newPlace);
-                break;
-            case 5:
-                zombiehome.insert(placePosition,newPlace);
-                break;
-            default:
-                qDebug() << "Create wrong place!!!" << endl;
-                break;
-            }
             cnt++;
         }
         if (mymap[cnt] == 100) break;
-        placeMap::iterator initplace = allplace.find(way1.mid(0,5));
-        if (initplace == allplace.end()) {
-            qDebug() << "Zombie can not begin out of their home!" << endl;
-        }
-        initplace->setPway(way1.mid(5));
-        initplace = allplace.find(way2.mid(0,5));
-        if (initplace == allplace.end()) {
-            qDebug() << "Zombie can not begin out of their home!" << endl;
-        }
-        initplace->setPway(way2.mid(5));
         cnt++;
     }
+    placeMap::iterator initplace = allplace.find(way1.mid(0,5));
+    if (initplace == allplace.end()) {
+        qDebug() << "Zombie can not begin out of their home!" << endl;
+    }
+    (*initplace)->setPway(way1.mid(5));
+    initplace = allplace.find(way2.mid(0,5));
+    if (initplace == allplace.end()) {
+        qDebug() << "Zombie can not begin out of their home!" << endl;
+    }
+    (*initplace)->setPway(way2.mid(5));
 }
 
 void GameState::addCreature(Creature* crt, QString posi)
@@ -82,18 +87,18 @@ void GameState::addCreature(Creature* crt, QString posi)
     else {
         if (canadd(crt, *addplace)) {
             if (crt->getIs_plant()) {
-                if (addplace->haveplant()) {
+                if ((*addplace)->haveplant()) {
                     qDebug() << "You can't add two plant in the same place!";
                 }
                 else {
-                    addplace->add_creature(crt);
+                    (*addplace)->add_creature(crt);
                     allplant.push_back(crt);
                     qDebug() << QString("A %1 is planted!").arg(crt->getName());
                     resource -= crt->getCost();
                 }
             }
             else {
-                addplace->add_creature(crt);
+                (*addplace)->add_creature(crt);
                 qDebug() << QString("A %1 is appeared!").arg(crt->getName());
                 allzombie.push_back(crt);
             }
@@ -107,6 +112,7 @@ void GameState::addCreature(Creature* crt, QString posi)
 void GameState::actionInARoll()
 {
     roll++;
+    computerAction();
     actionForPlant();
     actionForZombie();
     removeDead();
@@ -154,16 +160,16 @@ QString GameState::nextPlace(Creature *zom) {
     int x = zom->getCx(), y = zom->getCy();
     QChar a = zom->getWay()[0];
     if (a == 'N') {
-        x--;
+        x = floor(x);
     }
     else if (a == 'W') {
-        y--;
+        y = floor(y);
     }
     else if (a == 'S') {
-        x++;
+        x = ceil(x);
     }
     else if (a == 'E') {
-        y++;
+        y = ceil(y);
     }
     else {
         qDebug() << "Wrong Direction!!!";
@@ -179,7 +185,7 @@ QString GameState::nextPlace(Creature *zom) {
 bool GameState::canMove(Creature* zom) {
     bool result;
     placeMap::iterator it = allplace.find(nextPlace(zom));
-    bool nextplant = it->haveplant();
+    bool nextplant = (*it)->haveplant();
     if (!nextplant) {
         result = true;
     }
@@ -218,7 +224,7 @@ void GameState::removeDead()
             int x = (*it)->getCx(), y = (*it)->getCy();
             QString position = QString("(%1,%2)").arg(x).arg(y);
             placeMap::iterator dplace = allplace.find(position);
-            dplace->setPlantHere(nullptr);
+            (*dplace)->setPlantHere(nullptr);
             delete (*it);
             (*it) = nullptr;
             it = allplant.erase(it);
@@ -244,7 +250,6 @@ void GameState::GameOver()
 {
     if (gameover) {
         qDebug() << "Game Over!";
-        exit(-1);
     }
 }
 
@@ -263,7 +268,20 @@ void GameState::reportGameState()
     }
 }
 
+Place* GameState::findplace(QString posi) {
+    return allplace[posi];
+}
 
+void GameState::computerAction() {
+    if (roll % 20 == 0) {
+        NormalZombie* a2;
+        Ballon *b2;
+        a2 = new NormalZombie;
+        b2 = new Ballon;
+        addCreature(b2, "(1,7)");
+        addCreature(a2, "(1,8)");
+    }
+}
 
 
 

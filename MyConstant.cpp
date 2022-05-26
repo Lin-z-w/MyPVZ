@@ -1,8 +1,8 @@
 #include "MyConstant.h"
-const int INITRESOURSE = 100;
-
+const int INITRESOURSE = 1000;
+const int P_LEN = 200;
 //HP
-const int PeaShooterHP = 10, NormalZombieHP = 10, RemoteZombieHP = 10, BallonHP = 10, BigMouthHP = 10;
+const int PeaShooterHP = 100, NormalZombieHP = 100, RemoteZombieHP = 100, BallonHP = 100, BigMouthHP = 100, WallNutHP = 200;
 
 
 //Attack Range
